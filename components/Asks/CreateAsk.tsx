@@ -9,6 +9,8 @@ import { BigNumber, ethers, utils } from "ethers";
 
 export const CreateAsk = (nft) => {
 
+    console.log("what is nft: ", nft)
+
     interface createAskCall {
         tokenContract: any,
         tokenId: any,
@@ -17,18 +19,20 @@ export const CreateAsk = (nft) => {
         sellerFundsRecipient: any,
         findersFeeBps: any
     }
+
+    console.log("what is nft", nft)
     
     const [createAsk, setCreateAsk] = useState<createAskCall>({
-        "tokenContract": nft.nft.nft.contractAddress,
-        "tokenId": nft.nft.nft.tokenId,
+        "tokenContract": nft.nft.nft.token.collectionAddress,
+        "tokenId": nft.nft.nft.token.tokenId,
         "askPrice": "",
         "askCurrency": "0x0000000000000000000000000000000000000000",
         "sellerFundsRecipient": "",
         "findersFeeBps": ""
     })
 
-    const askTokenId = nft ? nft.nft.nft.tokenId : createAsk.tokenId
-    const askContractAddress = nft ? nft.nft.nft.contractAddress : createAsk.tokenContract
+    const askTokenId = nft ? nft.nft.nft.token.tokenId : createAsk.tokenId
+    const askContractAddress = nft ? nft.nft.nft.token.collectionAddress : createAsk.tokenContract
 
     // AsksV1_1 createAsk call
     const listingPrice = createAsk.askPrice ? ethers.utils.parseEther(createAsk.askPrice) : ""
@@ -59,13 +63,13 @@ export const CreateAsk = (nft) => {
     }
     
     return (
-        <div className="flex flex-row flex-wrap w-fit space-y-1">
+        <div className="flex flex-row flex-wrap w-fit space-y-1 text-white">
             <div className="flex flex-row flex-wrap w-full justify-center  border-solid ">
                 <div>
-                    {"Contract Address: " + shortenedAddress(nft.nft.nft.contractAddress)}
+                    {"Contract Address: " + shortenedAddress(nft.nft.nft.token.collectionAddress)}
                 </div>                    
                 <div className="ml-5 flex flex-row flex-wrap w-fit">                    
-                    {"Token Id: " + nft.nft.nft.tokenId}
+                    {"Token Id: " + nft.nft.nft.token.tokenId}
                 </div>                                       
             </div>                
             <div className="flex flex-row w-full">

@@ -15,12 +15,12 @@ export const CancelAsk = (nft) => {
     }
 
     const [cancelAsk, setCancelAsk] = useState<cancelAskCall>({
-        "tokenContract": nft.nft.nft.contractAddress,
-        "tokenId": nft.nft.nft.tokenId,
+        "tokenContract": nft.nft.nft.token.collectionAddress,
+        "tokenId": nft.nft.nft.token.tokenId,
     })
     
-    const askTokenId = nft ? nft.nft.nft.tokenId : cancelAsk.tokenId
-    const askContractAddress = nft ? nft.nft.nft.contractAddress : cancelAsk.tokenContract
+    const askTokenId = nft ? nft.nft.nft.token.tokenId : cancelAsk.tokenId
+    const askcollectionAddress = nft ? nft.nft.nft.token.collectionAddress : cancelAsk.tokenContract
 
     // AsksV1_1 cancelAsk Write
     const { data: cancelData, isError: cancelAskError, isLoading: cancelAskLoading, isSuccess: cancelAskSuccess, write: cancelAskWrite  } = useContractWrite({
@@ -28,7 +28,7 @@ export const CancelAsk = (nft) => {
         contractInterface: abi,
         functionName: 'cancelAsk',
         args: [
-            askContractAddress,
+            askcollectionAddress,
             askTokenId
         ],
         onError(error, variables, context) {
@@ -45,13 +45,13 @@ export const CancelAsk = (nft) => {
     }
     
     return (
-        <div className=" flex flex-row flex-wrap w-fit space-y-1">
+        <div className=" flex flex-row flex-wrap w-fit space-y-1 text-white">
             <div className="flex flex-row flex-wrap w-full justify-center">
                 <div>
-                    {"Contract Address: " + shortenedAddress(nft.nft.nft.contractAddress)}
+                    {"Contract Address: " + shortenedAddress(nft.nft.nft.token.collectionAddress)}
                 </div>                    
                 <div className="ml-5 flex flex-row flex-wrap ">                    
-                    {"Token Id: " + nft.nft.nft.tokenId}
+                    {"Token Id: " + nft.nft.nft.token.tokenId}
                 </div>                                       
             </div>                                                                     
             <button 

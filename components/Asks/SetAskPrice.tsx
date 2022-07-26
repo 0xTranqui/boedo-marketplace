@@ -17,14 +17,14 @@ export const SetAskPrice = (nft) => {
     }
 
     const [updateAsk, setUpdateAsk] = useState<updateAskCall>({
-        "tokenContract": nft.nft.nft.contractAddress,
-        "tokenId": nft.nft.nft.tokenId,
+        "tokenContract": nft.nft.nft.token.collectionAddress,
+        "tokenId": nft.nft.nft.token.tokenId,
         "askPrice": "",
         "askCurrency": "0x0000000000000000000000000000000000000000"
     })
 
-    const askTokenId = nft ? nft.nft.nft.tokenId : updateAsk.tokenId
-    const askContractAddress = nft ? nft.nft.nft.contractAddress : updateAsk.tokenContract
+    const askTokenId = nft ? nft.nft.nft.token.tokenId : updateAsk.tokenId
+    const askcollectionAddress = nft ? nft.nft.nft.token.collectionAddress : updateAsk.tokenContract
 
     // AsksV1_1 setAskPrice call
     const listingPrice = updateAsk.askPrice ? utils.parseEther(updateAsk.askPrice) : ""
@@ -34,7 +34,7 @@ export const SetAskPrice = (nft) => {
         contractInterface: abi,
         functionName: 'setAskPrice',
         args: [
-            askContractAddress,
+            askcollectionAddress,
             askTokenId,
             listingPrice,
             updateAsk.askCurrency
@@ -53,13 +53,13 @@ export const SetAskPrice = (nft) => {
     }
     
     return (
-        <div className="flex flex-row flex-wrap w-fit space-y-1">
+        <div className="flex flex-row flex-wrap w-fit space-y-1 text-white">
             <div className="flex flex-row flex-wrap w-full justify-center  border-solid ">
                 <div>
-                    {"Contract Address: " + shortenedAddress(nft.nft.nft.contractAddress)}
+                    {"Contract Address: " + shortenedAddress(nft.nft.nft.token.collectionAddress)}
                 </div>                    
                 <div className="ml-5 flex flex-row flex-wrap w-fit">                    
-                    {"Token Id: " + nft.nft.nft.tokenId}
+                    {"Token Id: " + nft.nft.nft.token.tokenId}
                 </div>                                       
             </div>                 
             <div className="flex flex-row w-full">

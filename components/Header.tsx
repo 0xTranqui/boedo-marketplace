@@ -21,24 +21,17 @@ export const Header = () => {
           </a>
         </Link>
         <Link
-          href="/indexer"
+          href="/mint"
         >
           <a className="hover:text-[#f53bc3]">
-            API
+            MINT
           </a>
         </Link>
         <Link
-          href="/create"
+          href="/gallery"
         >
           <a className="hover:text-[#f53bc3]">
-            CREATE
-          </a>
-        </Link>
-        <Link
-          href="/protocol"
-        >
-          <a className="hover:text-[#f53bc3]">
-            PROTOCOL
+            GALLERY
           </a>
         </Link>
       </div>

@@ -18,15 +18,15 @@ export const FillAsk = (nft) => {
     }
 
     const [fillAsk, setFillAsk] = useState<fillAskCall>({
-        "tokenContract": nft.nft.nft.contractAddress,
-        "tokenId": nft.nft.nft.tokenId,
+        "tokenContract": nft.nft.nft.token.collectionAddress,
+        "tokenId": nft.nft.nft.token.tokenId,
         "fillCurrency": "0x0000000000000000000000000000000000000000",
         "fillAmount": "",
         "finder": ""
     })
 
-    const askTokenId = nft ? nft.nft.nft.tokenId : fillAsk.tokenId
-    const askContractAddress = nft ? nft.nft.nft.contractAddress : fillAsk.tokenContract
+    const askTokenId = nft ? nft.nft.nft.token.tokenId : fillAsk.tokenId
+    const askcollectionAddress = nft ? nft.nft.nft.token.collectionAddress : fillAsk.tokenContract
 
 
     // AsksV1_1 fillAsk Write
@@ -37,7 +37,7 @@ export const FillAsk = (nft) => {
         contractInterface: abi,
         functionName: 'fillAsk',
         args: [
-            askContractAddress,
+            askcollectionAddress,
             askTokenId,
             fillAsk.fillCurrency,
             fillPrice,
@@ -61,13 +61,13 @@ export const FillAsk = (nft) => {
     }
 
     return (
-        <div className="flex flex-row flex-wrap w-fit space-y-1">
+        <div className="flex flex-row flex-wrap w-fit space-y-1 text-white">
             <div className="flex flex-row flex-wrap w-full justify-center  border-solid ">
                 <div>
-                    {"Contract Address: " + shortenedAddress(nft.nft.nft.contractAddress)}
+                    {"Contract Address: " + shortenedAddress(nft.nft.nft.token.collectionAddress)}
                 </div>                    
                 <div className="ml-5 flex flex-row flex-wrap ">                    
-                    {"Token Id: " + nft.nft.nft.tokenId}
+                    {"Token Id: " + nft.nft.nft.token.tokenId}
                 </div>                                       
             </div>               
             <div className="flex flex-row w-full">
